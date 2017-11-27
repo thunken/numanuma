@@ -5,7 +5,7 @@
 
 ## Latest release
 
-The most recent release is [`v1.0.0`](https://github.com/thunken/numanuma/releases/tag/v1.0.0).
+[![Release](https://jitpack.io/v/thunken/numanuma.svg?style=flat-square)](https://github.com/thunken/numanuma/releases)
 
 To add a dependency on this project using Gradle, Maven, sbt, or Leiningen, we recommend using [JitPack](https://jitpack.io/#thunken/numanuma/v1.0.0). The Maven group ID is `com.github.thunken`, and the artifact ID is `numanuma`.
 
