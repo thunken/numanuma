@@ -7,7 +7,7 @@
 
 [![Release](https://jitpack.io/v/thunken/numanuma.svg?style=flat-square)](https://github.com/thunken/numanuma/releases)
 
-To add a dependency on this project using Gradle, Maven, sbt, or Leiningen, we recommend using [JitPack](https://jitpack.io/#thunken/numanuma/v1.1.0). The Maven group ID is `com.github.thunken`, and the artifact ID is `numanuma`.
+To add a dependency on this project using Gradle, Maven, sbt, or Leiningen, we recommend using [JitPack](https://jitpack.io/#thunken/numanuma/1.1.1). The Maven group ID is `com.github.thunken`, and the artifact ID is `numanuma`.
 
 For example, for Maven, first add the JitPack repository to your build file:
 ```xml
@@ -24,7 +24,7 @@ And then add the dependency:
 	<dependency>
 	    <groupId>com.github.thunken</groupId>
 	    <artifactId>numanuma</artifactId>
-	    <version>v1.1.0</version>
+	    <version>1.1.1</version>
 	</dependency>
 ```
 
