@@ -17,6 +17,21 @@ import lombok.experimental.UtilityClass;
 public class EnumSets {
 
 	/**
+	 * Returns {@code true} if this set contains all elements of this type.
+	 *
+	 * @param <E>
+	 *            The type of the elements in the {@link EnumSet}.
+	 * @param set
+	 *            The {@link EnumSet} to test.
+	 * @return {@code true} if this set contains all elements of this type.
+	 * @throws NullPointerException
+	 *             If {@code set} is null.
+	 */
+	public static <E extends Enum<E>> boolean isFull(@NonNull final EnumSet<E> set) {
+		return EnumSet.complementOf(set).isEmpty();
+	}
+
+	/**
 	 * Creates an {@link EnumSet} initialized from the specified {@code int}-based bit flag. For each set bit in the bit
 	 * flag, the {@code Enum} constant with the corresponding {@link Enum#ordinal()} is added to the {@code EnumSet}.
 	 *
