@@ -2,6 +2,7 @@ package com.thunken.numanuma;
 
 import java.util.BitSet;
 import java.util.EnumSet;
+import java.util.function.Predicate;
 
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
@@ -15,6 +16,24 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class EnumSets {
+
+	/**
+	 * Creates an {@link EnumSet} with all the elements of this {@code Enum} that satisfy the given {@link Predicate}.
+	 *
+	 * @param <E>
+	 *            The type of the elements in the {@link EnumSet}.
+	 * @param elementType
+	 *            The class object of the element type for the specified {@link Enum}.
+	 * @return An {@link EnumSet} with all the elements of this {@code Enum} that satisfy the given {@link Predicate}.
+	 * @throws NullPointerException
+	 *             If any of {@code elementType} or {@code filter} is null.
+	 */
+	public static <E extends Enum<E>> EnumSet<E> filter(@NonNull final Class<E> elementType,
+			@NonNull final Predicate<E> filter) {
+		final EnumSet<E> set = EnumSet.allOf(elementType);
+		set.removeIf(filter.negate());
+		return set;
+	}
 
 	/**
 	 * Returns {@code true} if this set contains all elements of this type.
