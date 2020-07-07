@@ -24,6 +24,8 @@ public class EnumSets {
 	 *            The type of the elements in the {@link EnumSet}.
 	 * @param elementType
 	 *            The class object of the element type for the specified {@link Enum}.
+	 * @param filter
+	 *            The predicate used to filter elements of the specified {@link Enum}.
 	 * @return An {@link EnumSet} with all the elements of this {@code Enum} that satisfy the given {@link Predicate}.
 	 * @throws NullPointerException
 	 *             If any of {@code elementType} or {@code filter} is null.
