@@ -2,10 +2,8 @@ package com.thunken.numanuma;
 
 import java.util.BitSet;
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.function.Predicate;
-
-import lombok.NonNull;
-import lombok.experimental.UtilityClass;
 
 /**
  * Utility methods for working with {@link EnumSet} and other bit vectors.
@@ -14,8 +12,11 @@ import lombok.experimental.UtilityClass;
  * @see java.util.EnumSet
  * @see java.util.BitSet
  */
-@UtilityClass
-public class EnumSets {
+public final class EnumSets {
+
+	private EnumSets() {
+		/* NO OP */
+	}
 
 	/**
 	 * Creates an {@link EnumSet} with all the elements of this {@code Enum} that satisfy the given {@link Predicate}.
@@ -30,8 +31,9 @@ public class EnumSets {
 	 * @throws NullPointerException
 	 *             If any of {@code elementType} or {@code filter} is null.
 	 */
-	public static <E extends Enum<E>> EnumSet<E> filter(@NonNull final Class<E> elementType,
-			@NonNull final Predicate<E> filter) {
+	public static <E extends Enum<E>> EnumSet<E> filter(final Class<E> elementType, final Predicate<E> filter) {
+		Objects.requireNonNull(elementType, "elementType is null");
+		Objects.requireNonNull(filter, "filter is null");
 		final EnumSet<E> set = EnumSet.allOf(elementType);
 		set.removeIf(filter.negate());
 		return set;
@@ -48,7 +50,8 @@ public class EnumSets {
 	 * @throws NullPointerException
 	 *             If {@code set} is null.
 	 */
-	public static <E extends Enum<E>> boolean isFull(@NonNull final EnumSet<E> set) {
+	public static <E extends Enum<E>> boolean isFull(final EnumSet<E> set) {
+		Objects.requireNonNull(set, "set is null");
 		return EnumSet.complementOf(set).isEmpty();
 	}
 
@@ -69,10 +72,11 @@ public class EnumSets {
 	 * @throws NullPointerException
 	 *             If {@code elementType} is null.
 	 */
-	public static <E extends Enum<E>> EnumSet<E> ofBitFlag(final int bitFlag, @NonNull final Class<E> elementType) {
+	public static <E extends Enum<E>> EnumSet<E> ofBitFlag(final int bitFlag, final Class<E> elementType) {
 		if (bitFlag < 0) {
 			throw new IllegalArgumentException("bitFlag cannot be negative");
 		}
+		Objects.requireNonNull(elementType, "elementType is null");
 		final E[] enumConstants = elementType.getEnumConstants();
 		final int cardinality = enumConstants.length;
 		if (Integer.lowestOneBit(bitFlag) > cardinality) {
@@ -105,8 +109,9 @@ public class EnumSets {
 	 * @throws NullPointerException
 	 *             If {@code bitSet} or {@code elementType} is null.
 	 */
-	public static <E extends Enum<E>> EnumSet<E> ofBitSet(@NonNull final BitSet bitSet,
-			@NonNull final Class<E> elementType) {
+	public static <E extends Enum<E>> EnumSet<E> ofBitSet(final BitSet bitSet, final Class<E> elementType) {
+		Objects.requireNonNull(bitSet, "bitSet is null");
+		Objects.requireNonNull(elementType, "elementType is null");
 		final E[] enumConstants = elementType.getEnumConstants();
 		if (bitSet.length() > enumConstants.length) {
 			throw new IllegalArgumentException(
@@ -134,7 +139,8 @@ public class EnumSets {
 	 * @throws NullPointerException
 	 *             If {@code enumSet} is null.
 	 */
-	public static <E extends Enum<E>> int toBitFlag(@NonNull final EnumSet<E> enumSet) {
+	public static <E extends Enum<E>> int toBitFlag(final EnumSet<E> enumSet) {
+		Objects.requireNonNull(enumSet, "enumSet is null");
 		int bitFlag = 0;
 		for (final E element : enumSet) {
 			bitFlag |= 1L << element.ordinal();
@@ -154,7 +160,8 @@ public class EnumSets {
 	 * @throws NullPointerException
 	 *             If {@code enumSet} is null.
 	 */
-	public static <E extends Enum<E>> BitSet toBitSet(@NonNull final EnumSet<E> enumSet) {
+	public static <E extends Enum<E>> BitSet toBitSet(final EnumSet<E> enumSet) {
+		Objects.requireNonNull(enumSet, "enumSet is null");
 		final BitSet bitSet = new BitSet();
 		for (final E element : enumSet) {
 			bitSet.set(element.ordinal());

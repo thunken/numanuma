@@ -2,11 +2,9 @@ package com.thunken.numanuma;
 
 import java.util.BitSet;
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import lombok.NonNull;
-import lombok.experimental.UtilityClass;
 
 /**
  * Implementations of {@link Collector} that implement various useful reduction operations for enumerated types, such as
@@ -14,8 +12,11 @@ import lombok.experimental.UtilityClass;
  *
  * @see EnumSets
  */
-@UtilityClass
-public class EnumCollectors {
+public final class EnumCollectors {
+
+	private EnumCollectors() {
+		/* NO OP */
+	}
 
 	/**
 	 * Returns a {@code Collector} that accumulates the input elements into a new {@code int}-based bit flag.
@@ -50,8 +51,11 @@ public class EnumCollectors {
 	 * @param elementType
 	 *            The class object of the element type for the specified {@link Enum}.
 	 * @return A {@code Collector} which collects all the input elements into a new {@code EnumSet}.
+	 * @throws NullPointerException
+	 *             If {@code elementType} is null.
 	 */
-	public static <E extends Enum<E>> Collector<E, ?, EnumSet<E>> toEnumSet(@NonNull final Class<E> elementType) {
+	public static <E extends Enum<E>> Collector<E, ?, EnumSet<E>> toEnumSet(final Class<E> elementType) {
+		Objects.requireNonNull(elementType, "elementType is null");
 		return Collectors.toCollection(() -> EnumSet.noneOf(elementType));
 	}
 
